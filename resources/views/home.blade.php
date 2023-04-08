@@ -11,5 +11,11 @@
 </head>
 <body class="antialiased">
 <h1 class="text-center my-8 text-3xl font-bold">Hello World</h1>
+@foreach($articles as $article)
+    <ol>
+        <li>{{ $article->title }}</li>
+        <li>{{ $article->content }}</li>
+    </ol>
+@endforeach
 </body>
 </html>
