@@ -2,13 +2,13 @@
 
 use App\Providers\RouteServiceProvider;
 
-test('registration screen can be rendered', function () {
+test('registration screen can\'t be rendered', function () {
     $response = $this->get('/register');
 
-    $response->assertStatus(200);
+    $response->assertStatus(404);
 });
 
-test('new users can register', function () {
+test('new users can\'t register', function () {
     $response = $this->post('/register', [
         'name' => 'Test User',
         'email' => 'test@example.com',
@@ -16,6 +16,6 @@ test('new users can register', function () {
         'password_confirmation' => 'password',
     ]);
 
-    $this->assertAuthenticated();
-    $response->assertRedirect(RouteServiceProvider::HOME);
+    $this->assertGuest();
+//    $response->assertRedirect(RouteServiceProvider::HOME);
 });
