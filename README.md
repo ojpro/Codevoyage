@@ -66,7 +66,7 @@ To run tests, run the following command
 
 ## Authors
 
-- [@ojpro](https://www.github.com/ojpro)
+- [ojpro](https://www.ojpro.me)
 
 
 ## License
