@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Laravel</title>
+
+    @vite('resources/css/app.css')
+
 </head>
 <body class="antialiased">
-<h1>Hello World</h1>
+<h1 class="text-center my-8 text-3xl font-bold">Hello World</h1>
 </body>
 </html>
