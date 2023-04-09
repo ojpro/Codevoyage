@@ -11,8 +11,7 @@ class UpdateArticleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // TODO: Auth verification
-        return true;
+        return \auth()->check();
     }
 
     /**
