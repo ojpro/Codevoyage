@@ -16,8 +16,18 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [\App\Http\Controllers\ArticleController::class, 'index'])->name('home');
+Route::resource('article', \App\Http\Controllers\ArticleController::class);
 
-Route::resource('article', \App\Http\Controllers\ArticleController::class)->except('index');
+Route::prefix('article')
+    ->middleware('auth')
+    ->controller(\App\Http\Controllers\ArticleController::class)
+    ->group(function () {
+        Route::get('/create', 'create')->name('article.create');
+        Route::post('/', 'store')->name('article.store');
+        Route::get('/{article}/edit', 'edit')->name('article.edit');
+        Route::put('/{article}', 'update')->name('article.update');
+        Route::delete('/{article}', 'destroy')->name('article.destroy');
+    });
 
 
 Route::get('/dashboard', function () {
