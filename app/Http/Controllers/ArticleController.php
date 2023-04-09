@@ -41,8 +41,9 @@ class ArticleController extends Controller
         // add the new article
         Article::create($request->all());
 
-        // return success response
-        return response(['message' => 'New Article Added'], 201);
+        // redirect with success response
+        return redirect(route('home'))
+            ->with('message', 'New article added');
     }
 
     /**
@@ -77,8 +78,9 @@ class ArticleController extends Controller
         // update the details
         $fetched_article->update($request->all());
 
-        // send back a response
-        return response(['message' => 'Article has been updated.']);
+        // redirect to the article page with success message
+        return redirect(route('article.show', $article), 200)
+            ->with(['message' => 'Article has been updated']);
     }
 
     /**
@@ -92,7 +94,8 @@ class ArticleController extends Controller
         // delete the article
         $article_to_delete->delete();
 
-        // send success response
-        return response(['message' => 'Article has been deleted']);
+        // redirect with success response
+        return redirect(route('home'), 200)
+            ->with('message', 'Article has been deleted');
     }
 }
