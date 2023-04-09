@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {{-- // TODO: make it accessible --}}
-    <title>{{ config('app.name') }}</title>
+    <title>
+        @yield('title',config('app.name'))
+    </title>
 
     @vite('resources/css/app.css')
 

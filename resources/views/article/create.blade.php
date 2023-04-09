@@ -1,5 +1,8 @@
 @extends('layouts.blank')
 @section('content')
+    {{-- Page Title --}}
+    @section('title', 'Create New Article')
+
     <a href="{{ $previous_page }}"
        class="dark:text-blue-100 font-bold dark:hover:text-blue-400 hover:text-blue-500 m-2 block">
         <svg fill="none" class="w-4 h-auto inline-block mb-1 mx-2" stroke="currentColor" stroke-width="1.5"

@@ -8,6 +8,10 @@
         </svg>
         Go Back
     </a>
+
+    {{-- Page Title --}}
+    @section('title', 'Update Article')
+
     <!-- Main modal -->
     <div id="defaultModal" tabindex="-1" aria-hidden="true"
          class="overflow-y-auto overflow-x-hidden flex justify-center items-center w-full md:h-full md:mt-36">
@@ -25,7 +29,7 @@
                 <form action="{{ route('article.update', $article) }}" method="POST">
                     @method('PUT')
                     @csrf
-                    <div class="">
+                    <div class="my-4">
                         <div>
                             <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
                             <input type="text" name="title" id="brand"
