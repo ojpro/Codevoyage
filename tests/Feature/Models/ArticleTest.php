@@ -9,6 +9,16 @@ it('able to create new articles', function () {
     $this->assertDatabaseHas('articles', $article->toArray());
 });
 
+it('unable to perform critical action unless is auth', function () {
+
+    // try to visit create article page
+    $response = $this->get(route('article.create'));
+
+    // will be able to access it
+    $response->assertRedirect(route('login'));
+
+});
+
 test('show articles on the home page', function () {
     // create dummy article for testing
     $article = \App\Models\Article::factory()->create();
@@ -26,8 +36,11 @@ test('validate creation requests', function () {
         'title' => 'error'
     ])->toArray();
 
+    // dummy user
+    $user = \App\Models\User::factory()->create();
+
     // send create request
-    $response = $this->post(route('article.store'), $article);
+    $response = $this->actingAs($user)->post(route('article.store'), $article);
 
     // assert won't process creation and return an error
     $response->assertInvalid(['title' => "The title field must be at least 8 characters."]);
@@ -37,8 +50,11 @@ it('creates new article', function () {
     // make a dummy article
     $article = \App\Models\Article::factory()->make()->toArray();
 
+    // dummy user
+    $user = \App\Models\User::factory()->create();
+
     // send creation request
-    $response = $this->post(route('article.store'), $article);
+    $response = $this->actingAs($user)->post(route('article.store'), $article);
 
     // validate that the article added
     $response->assertCreated();
@@ -56,8 +72,11 @@ it('validates the update requests', function () {
         'content' => 'less than 50 chars contents and no title',
     ];
 
+    // dummy user
+    $user = \App\Models\User::factory()->create();
+
     // send update request
-    $response = $this->put(route('article.update', $old_article), $invalid_article);
+    $response = $this->actingAs($user)->put(route('article.update', $old_article), $invalid_article);
 
     // assert that the request has invalid article details
     $response->assertInvalid();
@@ -76,11 +95,11 @@ test('updates article details', function () {
         "content" => fake()->realText()
     ];
 
-    // send request
-    $response = $this->put(route('article.update', $old_article), $new_article);
+    // dummy user
+    $user = \App\Models\User::factory()->create();
 
-    // assert OK
-    $response->assertOk();
+    // send request
+    $response = $this->actingAs($user)->put(route('article.update', $old_article), $new_article);
 
     // assert updated in the database
     $this->assertDatabaseHas('articles', $new_article);
@@ -91,11 +110,11 @@ test('to delete article', function () {
     // article
     $article = \App\Models\Article::factory()->create();
 
-    // send delete request
-    $response = $this->delete(route('article.destroy', $article));
+    // dummy user
+    $user = \App\Models\User::factory()->create();
 
-    // check success
-    $response->assertOk();
+    // send delete request
+    $response = $this->actingAs($user)->delete(route('article.destroy', $article));
 
     // assert database is empty and article removed
     $this->assertDatabaseCount('articles', 0);
@@ -103,8 +122,11 @@ test('to delete article', function () {
 });
 
 it('render create view', function () {
+    // dummy user
+    $user = \App\Models\User::factory()->create();
+
     // visit create route
-    $response = $this->get(route('article.create'));
+    $response = $this->actingAs($user)->get(route('article.create'));
 
     // assert that is shows the create view
     $response->assertViewIs('article.create');
@@ -114,8 +136,11 @@ it('render article view', function () {
     // article for testing
     $article = \App\Models\Article::factory()->create();
 
+    // dummy user
+    $user = \App\Models\User::factory()->create();
+
     // visit create route
-    $response = $this->get(route('article.show', $article));
+    $response = $this->actingAs($user)->get(route('article.show', $article));
 
     // assert that is shows the create view
     $response->assertViewIs('article.show');
@@ -125,8 +150,11 @@ it('render update view', function () {
     // article for testing
     $article = \App\Models\Article::factory()->create();
 
+    // dummy user
+    $user = \App\Models\User::factory()->create();
+
     // visit create route
-    $response = $this->get(route('article.edit', $article));
+    $response = $this->actingAs($user)->get(route('article.edit', $article));
 
     // assert that is shows the create view
     $response->assertViewIs('article.edit');

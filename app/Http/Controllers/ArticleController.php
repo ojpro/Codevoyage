@@ -42,7 +42,7 @@ class ArticleController extends Controller
         Article::create($request->all());
 
         // redirect with success response
-        return redirect(route('home'))
+        return redirect(route('home'), 201)
             ->with('message', 'New article added');
     }
 
@@ -79,7 +79,7 @@ class ArticleController extends Controller
         $fetched_article->update($request->all());
 
         // redirect to the article page with success message
-        return redirect(route('article.show', $article), 200)
+        return redirect(route('article.show', $article))
             ->with(['message' => 'Article has been updated']);
     }
 
@@ -95,7 +95,7 @@ class ArticleController extends Controller
         $article_to_delete->delete();
 
         // redirect with success response
-        return redirect(route('home'), 200)
+        return redirect(route('home'))
             ->with('message', 'Article has been deleted');
     }
 }
