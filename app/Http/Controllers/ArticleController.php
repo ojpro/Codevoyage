@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
-use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
@@ -26,8 +25,12 @@ class ArticleController extends Controller
      */
     public function create()
     {
+        // TODO: need improvement
+        // previous page link
+        $previous_page = redirect()->back()->getTargetUrl();
+
         // return create view
-        return view('article.create');
+        return view('article.create', compact('previous_page'));
     }
 
     /**
@@ -56,8 +59,11 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
+        // previous page link
+        $previous_page = redirect()->back()->getTargetUrl();
+
         // edit article's view
-        return view('article.edit', compact('article'));
+        return view('article.edit', compact('article', 'previous_page'));
     }
 
     /**
