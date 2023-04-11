@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
+use App\Traits\UploadImage;
+use Illuminate\Support\Facades\Log;
 
 class ArticleController extends Controller
 {
@@ -38,8 +40,21 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
+        if ($request->file('thumbnail')) {
+            try {
+                $path = UploadImage::upload($request->file('thumbnail'))['path'];
+            } catch (\Exception $e) {
+                Log::info($e->getMessage());
+                return redirect()->back()->with(['error' => 'Unable to upload the image please try again']);
+            }
+        }
+
         // add the new article
-        Article::create($request->all());
+        Article::create([
+            'title' => $request->get('title'),
+            'thumbnail' => $path,
+            'content' => $request->get('content')
+        ]);
 
         // redirect with success response
         return redirect(route('home'), 201)
@@ -75,8 +90,21 @@ class ArticleController extends Controller
         // assert is does exist
         $fetched_article = Article::findOrFail($article['id']);
 
+        $path = $fetched_article->path;
+        if ($request->file('thumbnail')) {
+            try {
+                $path = UploadImage::upload($request->file('thumbnail'))['path'];
+            } catch (\Exception $e) {
+                Log::info($e->getMessage());
+                return redirect()->back()->with(['error' => 'Unable to upload the image please try again']);
+            }
+        }
         // update the details
-        $fetched_article->update($request->all());
+        $fetched_article->update([
+            'title' => $request->get('title'),
+            'thumbnail' => $path,
+            'content' => $request->get('content')
+        ]);
 
         // redirect to the article page with success message
         return redirect(route('article.show', $article))
