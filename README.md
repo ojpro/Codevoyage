@@ -51,7 +51,7 @@ php artisan key:generate
 npm run dev
 
 # then
- php artisan serve  # ⚡ you can create and alias for this command like mine `pas=php artisan serve`
+ php artisan serve  # ⚡ you can add an alias for this command like mine `pas=php artisan serve`
 ```
 
 Finaly I hope you like it.
