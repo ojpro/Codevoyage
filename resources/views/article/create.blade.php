@@ -25,7 +25,7 @@
                     </h3>
                 </div>
                 <!-- Modal body -->
-                <form action="{{ route('article.store') }}" method="POST">
+                <form action="{{ route('article.store') }}" method="POST" enctype="multipart/form-data">
                     @method('POST')
                     @csrf
                     <div class="">
@@ -41,11 +41,12 @@
 
                         <div class="my-4">
                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                   for="thumbnail">Upload thumbnail</label>
-                            <input
-                                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                                id="thumbnail" type="file">
-
+                                   for="thumbnail">Add thumbnail</label>
+                            <input name="thumbnail"
+                                   class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                   id="thumbnail" type="file">
+                            @error('thumbnail') <span
+                                class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</span> @enderror
                         </div>
 
 
