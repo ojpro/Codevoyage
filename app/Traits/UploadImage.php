@@ -49,7 +49,7 @@ class UploadImage
         Storage::disk('public')->putFileAs($dir, $file, $filename);
 
         // return the path of the image
-        return ['path' => Storage::disk('public')->path($dir . $filename)];
+        return ['path' => 'storage/' . $dir . $filename];
     }
 
     // method to check if a file is an image
