@@ -18,6 +18,7 @@ class ArticleFactory extends Factory
     {
         return [
             'title' => $this->faker->text(20),
+            'thumbnail' => $this->faker->imageUrl,
             'content' => $this->faker->realTextBetween(),
         ];
     }
