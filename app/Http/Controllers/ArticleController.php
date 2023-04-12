@@ -16,7 +16,7 @@ class ArticleController extends Controller
     public function index()
     {
         // fetch latest [n] blog's articles
-        $articles = Article::paginate(20);
+        $articles = Article::paginate(10);
 
         // return the articles to the home page
         return view('home', compact('articles'));

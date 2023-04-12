@@ -29,30 +29,35 @@
             </button>
         </div>
     @endif
-    {{-- List all the provided articles --}}
-    <div class="flex justify-around items-center flex-row flex-wrap gap-2 pt-10 px-10">
-        @foreach($articles as $article)
-            <div
-                class="overflow-hidden shadow-lg transition duration-500 ease-in-out hover:shadow-2xl rounded-lg md:w-80 dark:bg-gray-800">
-                <a href="{{ route('article.show',$article) }}">
-                    <img alt="blog photo"
-                         src="{{ asset($article['thumbnail']) }}"
-                         class="max-h-40 w-full object-cover"/>
-                </a>
-                <div class="w-full p-4">
-                    <a href="{{ route('article.show',$article) }}"
-                       class="dark:text-white text-2xl font-medium">{{ $article['title'] }}</a>
-                    <p class="text-gray-300 font-light text-md mt-1">{{$article['content']}}...<a
-                            class="inline-flex text-green-600" href="#">Read More</a>
-                    </p>
-                    <div
-                        class="flex flex-wrap justify-starts items-center py-3 text-xs text-white font-medium">
-                        <a href="#" class="m-1 px-2 py-1 rounded bg-green-500">#online </a>
-                        <a href="#" class="m-1 px-2 py-1 rounded bg-green-500">#internet </a>
-                        <a href="#" class="m-1 px-2 py-1 rounded bg-green-500">#education </a>
+    <div class="container mx-auto">
+        {{-- List all the provided articles --}}
+        <div class="flex justify-start items-center flex-row flex-wrap gap-4 pt-10 px-10">
+            @foreach($articles as $article)
+                <div
+                    class="overflow-hidden shadow-lg transition duration-500 ease-in-out hover:shadow-2xl rounded-lg md:w-80 dark:bg-gray-800">
+                    <a href="{{ route('article.show',$article) }}">
+                        <img alt="blog photo"
+                             src="{{ asset($article['thumbnail']) }}"
+                             class="max-h-40 w-full object-cover"/>
+                    </a>
+                    <div class="w-full p-4">
+                        <a href="{{ route('article.show',$article) }}"
+                           class="dark:text-white text-2xl font-medium">{{ $article['title'] }}</a>
+                        <p class="text-gray-500 font-light text-md mt-1">{{$article['content']}}...<a
+                                class="inline-flex text-green-600" href="#">Read More</a>
+                        </p>
+                        <div
+                            class="flex flex-wrap justify-starts items-center py-3 text-xs text-white font-medium">
+                            <a href="#" class="m-1 px-2 py-1 rounded bg-green-500">#online </a>
+                            <a href="#" class="m-1 px-2 py-1 rounded bg-green-500">#internet </a>
+                            <a href="#" class="m-1 px-2 py-1 rounded bg-green-500">#education </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
+        <div class="my-8">
+            {{ $articles->links() }}
+        </div>
     </div>
 @endsection
