@@ -60,7 +60,7 @@ class ArticleController extends Controller
         ]);
 
         // redirect with success response
-        return redirect(route('home'), 201)
+        return redirect()->route('home')
             ->with('message', 'New article added');
     }
 
@@ -107,7 +107,7 @@ class ArticleController extends Controller
             // get the article thumbnail url in case the thumbnail has not changed
             $path = $fetched_article->thumbnail;
         }
-        
+
         // update the details
         $fetched_article->update([
             'title' => $request->get('title'),
@@ -116,7 +116,7 @@ class ArticleController extends Controller
         ]);
 
         // redirect to the article page with success message
-        return redirect(route('article.show', $article))
+        return redirect()->route('article.show', $article)
             ->with(['message' => 'Article has been updated']);
     }
 
@@ -132,7 +132,7 @@ class ArticleController extends Controller
         $article_to_delete->delete();
 
         // redirect with success response
-        return redirect(route('home'))
+        return redirect()->route('home')
             ->with('message', 'Article has been deleted');
     }
 }
