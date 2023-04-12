@@ -45,9 +45,9 @@
                     <a href="#" class="py-2 text-green-600 inline-flex items-center justify-center mb-2">Cryptocurrency
                     </a>
                 </div>
-                <img
-                    src="{{ asset($article['thumbnail']) }}"
-                    class="w-full object-cover lg:rounded" style="height: 28em;"/>
+                <img alt="{{ $article['title'] }}"
+                     src="{{ asset($article['thumbnail']) }}"
+                     class="w-full object-cover lg:rounded" style="height: 28em;"/>
             </div>
             @auth()
                 <div class="flex mt-4">
