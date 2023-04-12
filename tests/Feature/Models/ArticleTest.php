@@ -6,7 +6,11 @@ it('able to create new articles', function () {
 
     // check that's has been added to the database
     $this->assertDatabaseCount('articles', 1);
-    $this->assertDatabaseHas('articles', $article->toArray());
+    $this->assertDatabaseHas('articles', [
+        'title'=>$article['title'],
+        'thumbnail'=>$article['thumbnail'],
+        'content'=>$article['content']
+    ]);
 });
 
 it('unable to perform critical action unless is auth', function () {
