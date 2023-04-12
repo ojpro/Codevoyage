@@ -30,8 +30,8 @@
         </div>
     @endif
     {{-- List all the provided articles --}}
-    @foreach($articles as $article)
-        <div class="flex justify-center flex-col md:flex-row gap-10 md:gap-5 pt-10 px-10">
+    <div class="flex justify-around items-center flex-row flex-wrap gap-2 pt-10 px-10">
+        @foreach($articles as $article)
             <div
                 class="overflow-hidden shadow-lg transition duration-500 ease-in-out hover:shadow-2xl rounded-lg md:w-80 dark:bg-gray-800">
                 <a href="{{ route('article.show',$article) }}">
@@ -53,5 +53,6 @@
                     </div>
                 </div>
             </div>
-    @endforeach
+        @endforeach
+    </div>
 @endsection
