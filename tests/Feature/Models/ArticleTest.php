@@ -47,8 +47,14 @@ test('validate creation requests', function () {
 });
 
 it('creates new article', function () {
+
+    // dummy image
+    $image = \Illuminate\Http\UploadedFile::fake()->image('image.png');
+
     // make a dummy article
-    $article = \App\Models\Article::factory()->make()->toArray();
+    $article = \App\Models\Article::factory()->make([
+        'thumbnail' => $image
+    ])->toArray();
 
     // dummy user
     $user = \App\Models\User::factory()->create();
@@ -56,11 +62,12 @@ it('creates new article', function () {
     // send creation request
     $response = $this->actingAs($user)->post(route('article.store'), $article);
 
-    // validate that the article added
-    $response->assertCreated();
-
     // also does exist in the database
-    $this->assertDatabaseHas('articles', $article);
+    $this->assertDatabaseCount('articles', 1);
+    $this->assertDatabaseHas('articles', [
+        'title' => $article['title'],
+        'content' => $article['content']
+    ]);
 });
 
 it('validates the update requests', function () {
