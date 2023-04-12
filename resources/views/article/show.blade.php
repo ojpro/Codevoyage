@@ -1,8 +1,8 @@
 @extends('layouts.basic')
-@section('content')
+{{-- Page Title --}}
+@section('title',$article['title'])
 
-    {{-- Page Title --}}
-    @section('title',$article['title'])
+@section('content')
 
     {{-- Show success message --}}
     @if (session('message'))
