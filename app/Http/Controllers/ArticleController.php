@@ -40,10 +40,13 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
+        // check if the thumbnail is provided
         if ($request->file('thumbnail')) {
             try {
+                // try to upload
                 $path = UploadImage::upload($request->file('thumbnail'))['path'];
             } catch (\Exception $e) {
+                // in case any error log it and return error message
                 Log::info($e->getMessage());
                 return redirect()->back()->with(['error' => 'Unable to upload the image please try again']);
             }
@@ -52,7 +55,7 @@ class ArticleController extends Controller
         // add the new article
         Article::create([
             'title' => $request->get('title'),
-            'thumbnail' => $path,
+            'thumbnail' => $path ?? '',
             'content' => $request->get('content')
         ]);
 
@@ -90,11 +93,16 @@ class ArticleController extends Controller
         // assert is does exist
         $fetched_article = Article::findOrFail($article['id']);
 
+        // get the article thumbnail url in case the thumbnail has not changed
         $path = $fetched_article->path;
+
+        // check if that the thumbnail does exist
         if ($request->file('thumbnail')) {
             try {
+                // upload
                 $path = UploadImage::upload($request->file('thumbnail'))['path'];
             } catch (\Exception $e) {
+                // handle errors
                 Log::info($e->getMessage());
                 return redirect()->back()->with(['error' => 'Unable to upload the image please try again']);
             }
