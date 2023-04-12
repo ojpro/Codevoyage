@@ -36,7 +36,7 @@
                 class="overflow-hidden shadow-lg transition duration-500 ease-in-out hover:shadow-2xl rounded-lg md:w-80 dark:bg-gray-800">
                 <a href="{{ route('article.show',$article) }}">
                     <img alt="blog photo"
-                         src="https://images.unsplash.com/photo-1542435503-956c469947f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80"
+                         src="{{ asset($article['thumbnail']) }}"
                          class="max-h-40 w-full object-cover"/>
                 </a>
                 <div class="w-full p-4">

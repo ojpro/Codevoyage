@@ -23,6 +23,7 @@ class StoreArticleRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'min:8'],
+            'thumbnail' => ['required','image', 'mimes:jpeg,png,jpg,gif', 'max:10240'],
             'content' => ['required', 'string', 'min:50'],
         ];
     }

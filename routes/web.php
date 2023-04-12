@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [\App\Http\Controllers\ArticleController::class, 'index'])->name('home');
-Route::resource('article', \App\Http\Controllers\ArticleController::class);
 
 Route::prefix('article')
     ->middleware('auth')
@@ -28,6 +27,8 @@ Route::prefix('article')
         Route::put('/{article}', 'update')->name('article.update');
         Route::delete('/{article}', 'destroy')->name('article.destroy');
     });
+
+Route::get('article/{article}', [\App\Http\Controllers\ArticleController::class, 'show'])->name('article.show');
 
 
 Route::get('/dashboard', function () {
