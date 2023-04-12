@@ -3,6 +3,10 @@
 
 Simple Personal Blog about programming and tech related topics.
 
+# Demo
+
+https://user-images.githubusercontent.com/108437129/231470801-b697a06f-7bc3-4163-8801-d819dfd687a1.mp4
+
 ## Run Locally
 
 1. Clone the project repository
