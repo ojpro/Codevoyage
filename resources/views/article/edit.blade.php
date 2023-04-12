@@ -1,4 +1,7 @@
 @extends('layouts.blank')
+{{-- Page Title --}}
+@section('title', 'Update Article')
+
 @section('content')
     <a href="{{ $previous_page }}"
        class="dark:text-blue-100 font-bold dark:hover:text-blue-400 hover:text-blue-500 m-2 block">
@@ -8,9 +11,6 @@
         </svg>
         Go Back
     </a>
-
-    {{-- Page Title --}}
-    @section('title', 'Update Article')
 
     <!-- Main modal -->
     <div id="defaultModal" tabindex="-1" aria-hidden="true"

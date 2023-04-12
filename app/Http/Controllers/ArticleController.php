@@ -93,9 +93,6 @@ class ArticleController extends Controller
         // assert is does exist
         $fetched_article = Article::findOrFail($article['id']);
 
-        // get the article thumbnail url in case the thumbnail has not changed
-        $path = $fetched_article->path;
-
         // check if that the thumbnail does exist
         if ($request->file('thumbnail')) {
             try {
@@ -106,11 +103,15 @@ class ArticleController extends Controller
                 Log::info($e->getMessage());
                 return redirect()->back()->with(['error' => 'Unable to upload the image please try again']);
             }
+        } else {
+            // get the article thumbnail url in case the thumbnail has not changed
+            $path = $fetched_article->thumbnail;
         }
+        
         // update the details
         $fetched_article->update([
             'title' => $request->get('title'),
-            'thumbnail' => $path,
+            'thumbnail' => $path ?? null,
             'content' => $request->get('content')
         ]);
 

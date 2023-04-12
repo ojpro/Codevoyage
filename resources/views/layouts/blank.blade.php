@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>
-        @yield('title',config('app.name'))
+        @yield('title', 'Codevoyage')
     </title>
 
-    @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
 
 </head>
 <body class="antialiased dark:bg-gray-900">
