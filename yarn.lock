@@ -333,7 +333,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"alpinejs@npm:^3.12.0":
+"alpinejs@npm:^3.4.2":
   version: 3.12.0
   resolution: "alpinejs@npm:3.12.0"
   dependencies:
@@ -1748,7 +1748,7 @@ __metadata:
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
     "@tailwindcss/forms": ^0.5.2
-    alpinejs: ^3.12.0
+    alpinejs: ^3.4.2
     autoprefixer: ^10.4.2
     axios: ^1.1.2
     laravel-vite-plugin: ^0.7.2
